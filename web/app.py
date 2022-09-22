@@ -1,11 +1,11 @@
-from distutils.command.upload import upload
 import streamlit as st
 import pandas as pd
 from img_classification import *
 
-st.title("Image Classification ...")
-st.header("...")
-st.text("Upload a ... Image for image classification as COVID19, Pneumonia or Normal")
+st.title("Detecting COVID-19 / Pneumonia through chest x-ray image")
+st.markdown("University of Information and Technology - Vietnam National University")
+st.header("Upload Image")
+st.text("Description: Upload a chest x-ray image for detecting as COVID19, Pneumonia or Normal")
 
 uploaded_file = st.file_uploader("Choose an image ...", type=["jpg", "jpeg", "png"])
 if uploaded_file is not None:
@@ -17,8 +17,11 @@ if uploaded_file is not None:
     buffer.seek(0)
     bg_image = buffer
     
-    prob = prediction(bg_image)
-    
+    with st.spinner("Progressing..."):
+        prob = prediction(bg_image)
+
+    st.header("Result")
+
     if np.argmax(prob) == 0:
         st.write("Class: COVID-19")
     elif np.argmax(prob) == 1:
