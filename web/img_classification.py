@@ -1,5 +1,3 @@
-import io
-import keras
 from PIL import Image, ImageOps
 from keras.applications import VGG16, ResNet50V2
 from keras.preprocessing.image import ImageDataGenerator
